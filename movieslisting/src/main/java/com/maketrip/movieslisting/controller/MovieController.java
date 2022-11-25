@@ -26,10 +26,22 @@ public class MovieController {
         return new ResponseEntity<>(details, HttpStatus.OK);
     }
 
+    @GetMapping("/allDetailsLocationAsc")
+    public ResponseEntity<List<Details>> getAllMoviesDetailsAsc(){
+        List<Details> details= detailsService.findAllByOrderByLocationsAsc();
+        return new ResponseEntity<>(details, HttpStatus.OK);
+    }
+
     @PostMapping("/addDetails")
     public  ResponseEntity<Details> addDetails(@RequestBody Details details){
         Details newDetails = detailsService.addDetails(details);
         return  new ResponseEntity<>(newDetails,HttpStatus.OK);
     }
 
+
+    @GetMapping("/allDetailsSort/{orderBy}/{column}")
+    public ResponseEntity<List<Details>> getAllMoviesSort(@PathVariable("orderBy") String orderBy, @PathVariable("column") String column){
+        List<Details> details= detailsService.findAllOrderBySort(orderBy,column);
+        return new ResponseEntity<>(details, HttpStatus.OK);
+    }
 }

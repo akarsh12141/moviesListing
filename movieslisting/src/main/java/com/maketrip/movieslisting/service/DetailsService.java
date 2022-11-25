@@ -30,4 +30,23 @@ public class DetailsService {
     public List<Details> findAllDetails(){
         return detailsRepo.findAll();
     }
+
+    public List<Details> findAllByOrderByLocationsAsc(){
+        return detailsRepo.findAllByOrderByLocationsAsc();
+    }
+
+    public List<Details> findAllOrderBySort(String orderBy, String column){
+        if(orderBy.equals("Asc") && column.equals("Location")){
+            return detailsRepo.findAllByOrderByLocationsAsc();
+        }
+        else if(orderBy.equals("Desc") && column.equals("Location")){
+            return detailsRepo.findAllByOrderByLocationsDesc();
+        } else if (orderBy.equals("Asc") && column.equals("Name")) {
+            return detailsRepo.findAllByOrderByNameAsc();
+        }
+        else {
+            return detailsRepo.findAllByOrderByNameDesc();
+        }
+
+    }
 }
